@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bill</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+        .bill-container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: #f8f9fa;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .table th, .table td {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="bill-container">
+    <h2>BILL</h2>
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>S.No</th>
+                <th>Name</th>
+                <th>Nos</th>
+                <th>Price</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            {% set amount = order.ordernos * order.orderprice %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ order.ordername }}</td>
+                <td>{{ order.ordernos }}</td>
+                <td>{{ order.orderprice }}</td>
+                <td>{{ amount }}</td>
+            </tr>
+            {% endfor %}
+            <tr class="table-primary">
+                <td colspan="4"><strong>Total Amount</strong></td>
+                <td><strong>{{ total_amount }}</strong></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
+
+</body>
+</html>

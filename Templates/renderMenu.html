@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .category-heading {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        table {
+            background-color: white;
+            width: 100%;
+            table-layout: fixed; /* Ensures fixed column width */
+        }
+        th, td {
+            text-align: center;
+            vertical-align: middle;
+            white-space: nowrap; /* Prevents text wrapping */
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Set fixed pixel width for each column */
+        th:nth-child(1), td:nth-child(1) { width: 50px; }   /* S.No */
+        th:nth-child(2), td:nth-child(2) { width: 200px; }  /* Name */
+        th:nth-child(3), td:nth-child(3) { width: 100px; }  /* Price */
+        th:nth-child(4), td:nth-child(4) { width: 80px; }   /* Nos */
+        th:nth-child(5), td:nth-child(5) { width: 120px; }  /* Order */
+
+        .quantity-input {
+            width: 50px; /* Fixed width */
+            text-align: center; /* Center the text inside the input */
+            display: block;
+            margin: 0 auto; /* Center the input box horizontally */
+        }
+
+        /* BILL Button Styling */
+        .bill-button-container {
+            display: flex;
+            justify-content: end;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- BILL Button -->
+        <div class="bill-button-container">
+            <form action="/renderBillRequest" method="GET">
+                <button class="btn btn-success" type="submit">BILL</button>
+            </form>
+        </div>
+
+        <h1 class="text-center my-4">Menu Card</h1>
+
+        {% for category in categories %}
+            <h3 class="category-heading">{{ category }}</h3>
+            <table class="table table-bordered table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>S.No</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Nos</th> <!-- Quantity Column -->
+                        <th>Order</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in categories[category] %}  <!-- Using categories[category] -->
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.price }}</td>
+                        <form action="/add_order" method="POST">
+                            <input name="orderid" type="hidden" value="{{ item.id }}">
+                            <input name="ordername" type="hidden" value="{{ item.name }}">
+                            <input name="orderprice" type="hidden" value="{{ item.price }}">
+                            <td>
+                                <input type="number" name="ordernos" class="form-control quantity-input" min="1" value="1">
+                            </td>
+                            <td><button type="submit" class="btn btn-success">Order</button></td>
+                        </form>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endfor %}
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
