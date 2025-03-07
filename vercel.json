@@ -6,18 +6,22 @@
         "use": "@vercel/python"
       },
       {
-        "src": "static/*",
+        "src": "Templates/*",
         "use": "@vercel/static"
       }
     ],
     "routes": [
       {
-        "src": "/api/(.*)",
-        "dest": "api/main.py"
+        "src": "/(.*)",
+        "dest": "qrgenerator.py"
       },
       {
         "src": "/(.*)",
-        "dest": "/static/index.html"
+        "dest": "/Templates/renderMenu.html"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/Templates/renderBill.html"
       }
     ]
   }
