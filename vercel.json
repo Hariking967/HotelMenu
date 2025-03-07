@@ -1,28 +1,14 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "qrgenerator.py",
-        "use": "@vercel/python"
-      },
-      {
-        "src": "Templates/*",
-        "use": "@vercel/static"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "qrgenerator.py"
-      },
-      {
-        "src": "/(.*)",
-        "dest": "/Templates/renderMenu.html"
-      },
-      {
-        "src": "/(.*)",
-        "dest": "/Templates/renderBill.html"
-      }
-    ]
-  }
-  
+  "builds": [
+    {
+      "src": "qrgenerator.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "qrgenerator.py"
+    }
+  ]
+}
