@@ -38,9 +38,6 @@ def renderBill():
     total_amount = sum(order.ordernos * order.orderprice for order in orders)
     return render_template('renderBill.html', orders=orders, total_amount=total_amount)
 
-# Vercel requires this to work
-def handler(event, context):
-    return app(event, context)
-
-if __name__ == "__main__":
-    app.run(debug=True)
+# 🔹 Required for Vercel
+from flask_lambda import FlaskLambda
+app = FlaskLambda(app)
