@@ -1,4 +1,24 @@
 {
-  "builds": [{ "src": "qrgenerator.py", "use": "@vercel/python" }],
-  "routes": [{ "src": "/(.*)", "dest": "qrgenerator.py" }]
-}
+    "version": 2,
+    "builds": [
+      {
+        "src": "qrgenerator.py",
+        "use": "@vercel/python"
+      },
+      {
+        "src": "static/*",
+        "use": "@vercel/static"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/api/(.*)",
+        "dest": "api/main.py"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/static/index.html"
+      }
+    ]
+  }
+  
